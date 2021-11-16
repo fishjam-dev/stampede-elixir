@@ -21,7 +21,8 @@ defmodule Stampede.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:playwright, "~> 0.1.16-preview-2"}
+      {:playwright, "~> 0.1.16-preview-2"},
+      {:uuid, "~> 1.1"}
     ]
   end
 end
