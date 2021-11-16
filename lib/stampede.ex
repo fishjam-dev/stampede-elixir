@@ -3,6 +3,12 @@ defmodule Stampede do
     launch_browser() |> mustang_module.run
   end
 
+  def start(mustang_module, %{count: count} = _options) do
+    browser = launch_browser()
+    tasks = Enum.map(1..count, fn _x -> Task.async(fn -> mustang_module.run(browser) end) end)
+    Task.await_many(tasks, :infinity)
+  end
+
   def launch_browser() do
     launch_options = %{
       args: [

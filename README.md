@@ -15,9 +15,22 @@ def deps do
 end
 ```
 
-## Usage
+## Setup
+
+```
+mix deps.get
+
+# In the assets/ folder
+npm i
+```
+
+## Examples
 
 `mix run examples/run_a_single_user.exs`
+
+or
+
+`mix run examples/run_multiple_users.exs`
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
