@@ -1,4 +1,4 @@
-defmodule Mustang do
+defmodule Stampede.Mustang do
   @moduledoc """
   A single browser user with behaviors
   """
@@ -14,7 +14,7 @@ defmodule Mustang do
 
   defmacro __using__(_opts) do
     quote location: :keep do
-      @behaviour Mustang
+      @behaviour Stampede.Mustang
 
       @impl true
       def run(browser, options) do

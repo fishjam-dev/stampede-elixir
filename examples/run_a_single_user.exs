@@ -1,5 +1,5 @@
 defmodule ExampleMustang do
-  use Mustang
+  use Stampede.Mustang
 
   @impl true
   def join(browser, options) do

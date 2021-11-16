@@ -1,5 +1,5 @@
 defmodule ExampleMustang do
-  use Mustang
+  use Stampede.Mustang
 
   @impl true
   def join(browser, options) do
@@ -9,7 +9,7 @@ defmodule ExampleMustang do
   end
 
   @impl true
-  def linger(_browser, options) do
+  def linger(_browser, _options) do
     :timer.sleep(:timer.seconds(5))
   end
 end
@@ -17,4 +17,4 @@ end
 mustang_options = %{ target_url: "https://google.com" }
 options = %{ count: 3 }
 
-Stampede.start({ExampleMustang, mustang_options}, stampede_options)
+Stampede.start({ExampleMustang, mustang_options}, options)

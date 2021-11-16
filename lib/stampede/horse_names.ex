@@ -1,4 +1,4 @@
-defmodule HorseNames do
+defmodule Stampede.HorseNames do
   def random do
     list() |> Enum.random()
   end
