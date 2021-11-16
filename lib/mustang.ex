@@ -3,74 +3,74 @@ defmodule Mustang do
   A single browser user with behaviors
   """
 
-  @callback run(Playwright.Browser.t()) :: any()
-  @callback beforeJoin(Playwright.Browser.t()) :: any()
-  @callback join(Playwright.Browser.t()) :: any()
-  @callback afterJoin(Playwright.Browser.t()) :: any()
-  @callback linger(Playwright.Browser.t()) :: any()
-  @callback beforeLeave(Playwright.Browser.t()) :: any()
-  @callback leave(Playwright.Browser.t()) :: any()
-  @callback afterLeave(Playwright.Browser.t()) :: any()
+  @callback run(Playwright.Browser.t(), Map.t()) :: any()
+  @callback beforeJoin(Playwright.Browser.t(), Map.t()) :: any()
+  @callback join(Playwright.Browser.t(), Map.t()) :: any()
+  @callback afterJoin(Playwright.Browser.t(), Map.t()) :: any()
+  @callback linger(Playwright.Browser.t(), Map.t()) :: any()
+  @callback beforeLeave(Playwright.Browser.t(), Map.t()) :: any()
+  @callback leave(Playwright.Browser.t(), Map.t()) :: any()
+  @callback afterLeave(Playwright.Browser.t(), Map.t()) :: any()
 
   defmacro __using__(_opts) do
     quote location: :keep do
       @behaviour Mustang
 
       @impl true
-      def run(browser) do
+      def run(browser, options) do
         browser
-        |> beforeJoin()
-        |> join()
-        |> afterJoin()
-        |> linger()
-        |> beforeLeave()
-        |> leave()
-        |> afterLeave()
+        |> beforeJoin(options)
+        |> join(options)
+        |> afterJoin(options)
+        |> linger(options)
+        |> beforeLeave(options)
+        |> leave(options)
+        |> afterLeave(options)
       end
 
       @impl true
-      def beforeJoin(browser) do
-        browser
-      end
-
-      @impl true
-      def join(browser) do
+      def beforeJoin(browser, options) do
         browser
       end
 
       @impl true
-      def afterJoin(browser) do
+      def join(browser, options) do
         browser
       end
 
       @impl true
-      def linger(browser) do
+      def afterJoin(browser, options) do
         browser
       end
 
       @impl true
-      def beforeLeave(browser) do
+      def linger(browser, options) do
         browser
       end
 
       @impl true
-      def leave(browser) do
+      def beforeLeave(browser, options) do
         browser
       end
 
       @impl true
-      def afterLeave(browser) do
+      def leave(browser, options) do
         browser
       end
 
-      defoverridable run: 1
-      defoverridable beforeJoin: 1
-      defoverridable join: 1
-      defoverridable afterJoin: 1
-      defoverridable linger: 1
-      defoverridable beforeLeave: 1
-      defoverridable leave: 1
-      defoverridable afterLeave: 1
+      @impl true
+      def afterLeave(browser, options) do
+        browser
+      end
+
+      defoverridable run: 2
+      defoverridable beforeJoin: 2
+      defoverridable join: 2
+      defoverridable afterJoin: 2
+      defoverridable linger: 2
+      defoverridable beforeLeave: 2
+      defoverridable leave: 2
+      defoverridable afterLeave: 2
     end
   end
 end

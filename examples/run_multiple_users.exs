@@ -2,16 +2,19 @@ defmodule ExampleMustang do
   use Mustang
 
   @impl true
-  def join(browser) do
+  def join(browser, options) do
     page = browser |> Playwright.Browser.new_page()
 
-    page |> Playwright.Page.goto("https://google.com")
+    page |> Playwright.Page.goto(options.target_url)
   end
 
   @impl true
-  def linger(_browser) do
+  def linger(_browser, options) do
     :timer.sleep(:timer.seconds(5))
   end
 end
 
-Stampede.start(ExampleMustang, %{count: 3})
+mustang_options = %{ target_url: "https://google.com" }
+stampede_options = %{ count: 3 }
+
+Stampede.start({ExampleMustang, mustang_options}, stampede_options)
