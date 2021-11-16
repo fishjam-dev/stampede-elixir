@@ -14,6 +14,6 @@ defmodule ExampleMustang do
   end
 end
 
-mustang_options = %{ name: "Example Mustang", target_url: "http://google.com" }
+mustang_options = %{ target_url: "http://google.com" }
 
 Stampede.start({ExampleMustang, mustang_options})
