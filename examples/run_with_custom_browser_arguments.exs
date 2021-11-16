@@ -9,12 +9,12 @@ defmodule ExampleMustang do
   end
 
   @impl true
-  def linger(_browser, options) do
+  def linger(_browser, _options) do
     :timer.sleep(:timer.seconds(5))
   end
 end
 
-mustang_options = %{ target_url: "https://google.com" }
-options = %{ count: 3 }
+mustang_options = %{ target_url: "http://google.com" }
+options = %{ headless: false, args: ["--enable-logging"], count: 1 }
 
-Stampede.start({ExampleMustang, mustang_options}, stampede_options)
+Stampede.start({ExampleMustang, mustang_options}, options)

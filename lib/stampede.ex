@@ -3,26 +3,32 @@ defmodule Stampede do
     launch_browser() |> mustang_module.run(mustang_options)
   end
 
-  def start({mustang_module, mustang_options}, %{count: count} = _options) do
-    browser = launch_browser()
+  def start({mustang_module, mustang_options}, options) do
+    browser = launch_browser(options)
 
-    tasks =
-      Enum.map(1..count, fn _x ->
-        Task.async(fn -> mustang_module.run(browser, mustang_options) end)
-      end)
+    if options.count do
+      tasks =
+        Enum.map(1..options.count, fn _x ->
+          Task.async(fn -> mustang_module.run(browser, mustang_options) end)
+        end)
 
-    Task.await_many(tasks, :infinity)
+      Task.await_many(tasks, :infinity)
+    else
+      mustang_module.run(browser, mustang_options)
+    end
   end
 
-  def launch_browser() do
+  def launch_browser(options \\ %{}) do
+    default_browser_args = [
+      "--use-fake-device-for-media-stream",
+      "--use-fake-ui-for-media-stream"
+    ]
+
+    additional_args = Map.get(options, :args, [])
+
     launch_options = %{
-      args: [
-        "--use-fake-device-for-media-stream",
-        "--use-fake-ui-for-media-stream",
-        "--enable-logging",
-        "--force-fieldtrials=WebRTC-Audio-Red-For-Opus/Disabled/"
-      ],
-      headless: false
+      args: default_browser_args ++ additional_args,
+      headless: Map.get(options, :headless, true)
     }
 
     Application.put_env(:playwright, LaunchOptions, launch_options)
