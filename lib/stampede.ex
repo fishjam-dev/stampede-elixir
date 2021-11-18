@@ -7,7 +7,7 @@ defmodule Stampede do
   """
   @type options_t() :: %{
           count: pos_integer(),
-          delay: :timer.time()
+          delay: timeout()
         }
 
   def start({mustang_module, mustang_options}) do
@@ -16,7 +16,6 @@ defmodule Stampede do
 
   def start({mustang_module, mustang_options}, options) do
     browser = launch_browser(options)
-    IO.inspect(options, label: :opts)
 
     if options.count do
       delay = Map.get(options, :delay, 0)
@@ -24,7 +23,7 @@ defmodule Stampede do
       tasks =
         Enum.map(1..options.count, fn _x ->
           task_ref = Task.async(fn -> mustang_module.run(browser, mustang_options) end)
-          :timer.sleep(delay)
+          Process.sleep(delay)
           task_ref
         end)
 

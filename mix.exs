@@ -22,7 +22,8 @@ defmodule Stampede.MixProject do
   defp deps do
     [
       {:playwright, "~> 0.1.16-preview-2"},
-      {:uuid, "~> 1.1"}
+      {:uuid, "~> 1.1"},
+      {:ex_doc, "0.25.4", only: :dev, runtime: false}
     ]
   end
 end
