@@ -3,14 +3,14 @@ defmodule Stampede.Mustang do
   A single browser user with behaviors
   """
 
-  @callback run(Playwright.Browser.t(), Map.t()) :: any()
-  @callback beforeJoin(Playwright.Browser.t(), Map.t()) :: any()
-  @callback join(Playwright.Browser.t(), Map.t()) :: any()
-  @callback afterJoin(Playwright.Browser.t(), Map.t()) :: any()
-  @callback linger(Playwright.Browser.t(), Map.t()) :: any()
-  @callback beforeLeave(Playwright.Browser.t(), Map.t()) :: any()
-  @callback leave(Playwright.Browser.t(), Map.t()) :: any()
-  @callback afterLeave(Playwright.Browser.t(), Map.t()) :: any()
+  @callback run(Playwright.Browser.t(), map()) :: any()
+  @callback beforeJoin(Playwright.Browser.t(), map()) :: any()
+  @callback join(Playwright.Browser.t(), map()) :: any()
+  @callback afterJoin(Playwright.Browser.t(), map()) :: any()
+  @callback linger(Playwright.Browser.t(), map()) :: any()
+  @callback beforeLeave(Playwright.Browser.t(), map()) :: any()
+  @callback leave(Playwright.Browser.t(), map()) :: any()
+  @callback afterLeave(Playwright.Browser.t(), map()) :: any()
 
   defmacro __using__(_opts) do
     quote location: :keep do

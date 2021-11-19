@@ -1,4 +1,15 @@
 defmodule Stampede do
+  @typedoc """
+  Stampede runtime options
+
+  * count - number of mustangs that will be spawned
+  * delay - delay between subsequent spawns
+  """
+  @type options_t() :: %{
+          count: pos_integer(),
+          delay: timeout()
+        }
+
   def start({mustang_module, mustang_options}) do
     launch_browser() |> mustang_module.run(mustang_options)
   end
@@ -7,9 +18,13 @@ defmodule Stampede do
     browser = launch_browser(options)
 
     if options.count do
+      delay = Map.get(options, :delay, 0)
+
       tasks =
         Enum.map(1..options.count, fn _x ->
-          Task.async(fn -> mustang_module.run(browser, mustang_options) end)
+          task_ref = Task.async(fn -> mustang_module.run(browser, mustang_options) end)
+          Process.sleep(delay)
+          task_ref
         end)
 
       Task.await_many(tasks, :infinity)
