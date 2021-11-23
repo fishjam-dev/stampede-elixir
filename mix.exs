@@ -21,7 +21,7 @@ defmodule Stampede.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:playwright, "~> 0.1.16-preview-3"},
+      {:playwright, github: "geometerio/playwright-elixir"},
       {:uuid, "~> 1.1"},
       {:ex_doc, "0.25.4", only: :dev, runtime: false}
     ]
