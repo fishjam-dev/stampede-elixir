@@ -13,5 +13,6 @@ defmodule Mix.Tasks.Stampede.Setup do
   @impl true
   def run(_args) do
     Playwright.CLI.install_browsers()
+    Playwright.CLI.install_deps()
   end
 end
