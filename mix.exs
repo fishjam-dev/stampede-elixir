@@ -7,7 +7,8 @@ defmodule Stampede.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -21,9 +22,15 @@ defmodule Stampede.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:playwright, github: "geometerio/playwright-elixir"},
+      {:playwright, "0.1.17-preview-6"},
       {:uuid, "~> 1.1"},
       {:ex_doc, "0.25.4", only: :dev, runtime: false}
+    ]
+  end
+
+  defp aliases do
+    [
+      setup: ["playwright.install_browsers"]
     ]
   end
 end

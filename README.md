@@ -19,9 +19,8 @@ end
 
 ```
 mix deps.get
-
-# In the assets/ folder
-npm i
+mix deps.compile
+mix setup # Alias for mix playwright.install_browsers
 ```
 
 ## Examples
