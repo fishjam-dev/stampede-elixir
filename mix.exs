@@ -21,7 +21,7 @@ defmodule Stampede.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:playwright, github: "jellyfish-dev/playwright-elixir"},
+      {:playwright, github: "jellyfish-dev/playwright-elixir", branch: "update-fork"},
       {:elixir_uuid, "~> 1.2.1"},
       {:ex_doc, "0.25.4", only: :dev, runtime: false}
     ]
